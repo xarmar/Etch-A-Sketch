@@ -1,0 +1,24 @@
+.pageContainer {
+    display: block;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gridContainer {
+    display: flex;
+    align-items: center;
+}
+
+.verticalDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.horizontalDiv {
+    display: flex;
+    flex-direction: row;
+    background-color: green;
+    margin: 1px;
+    padding: 10px;
+}
