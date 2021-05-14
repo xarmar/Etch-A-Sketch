@@ -1,29 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const container = document.querySelector("#gridContainer");
-    grid(16);
-
-const introductionId = document.querySelector("#introduction");
+    const gridInfo = document.querySelector("#gridInfo");
+    const gridContainer = document.querySelector("#gridContainer");
+    setGrid(10);
+    grid(10);
+    gridInfo.innerText = (`10 x 10 grid`)
 
 // Listen for Clicks on "Reset Grid" Button
 const resetButton = document.querySelector("#resetButton");
 resetButton.addEventListener("click", resetPrompt);
+
+const introductionId = document.querySelector("#introduction");
 
 function resetPrompt() {
     resetButton.style.cssText = "visibility: hidden";
     // Creates Textfield for User Input and a Submit Button
     let promptUser = document.createElement("input");
     promptUser.placeholder = " Number '10' =  10x10 grid"
-    promptUser.classList.add("input")
+    promptUser.classList.add("input");
     introductionId.appendChild(promptUser);
     let submitButton = document.createElement("button");
     submitButton.innerText = "Create"
     submitButton.classList.add("submitButton");
     introductionId.appendChild(submitButton);
+    promptUser.addEventListener("keydown", enterKeyCheck);
     submitButton.addEventListener("click", fullReset);
+
+    function enterKeyCheck(e) {
+        if (e.code === "Enter") {
+            fullReset()
+        }
+    }
 
     function fullReset(){
         let userInput = promptUser.value;
-        if (isNaN(userInput) || userInput > 100){
+        if (isNaN(userInput) || userInput > 100 || userInput === ""){
             alert("Only numbers equal to or smaller than 100 are valid.")
         }
         else {
@@ -31,6 +41,7 @@ function resetPrompt() {
             // Deletes previous grid
             deleteGrid();
             // Creates new grid with userInput
+            setGrid(userInput);
             grid(userInput);
             listenForSquareHover();
         }
@@ -39,47 +50,37 @@ function resetPrompt() {
     function deleteGrid() {
         promptUser.remove();
         submitButton.remove();
-        let allVerticalDivs = document.querySelectorAll(".verticalDiv");
-        allVerticalDivs.forEach(verticalDiv => {
-            verticalDiv.remove();
+        let elements = document.querySelectorAll(".element");
+        elements.forEach(element => {
+            element.remove();
         });
-        let allHorizontalDivs = document.querySelectorAll(".horizontalDiv");
-        allHorizontalDivs.forEach(horizontalDiv => {
-            horizontalDiv.remove();
-        });    
     }
 }
 
+function setGrid(size) {
+    gridContainer.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    gridInfo.innerText = `${size} x ${size} grid`
+    }
 
 // Creates a standard "number by number" grid of squares.
 function grid(number) {
-    for (i = 0; i < number; i++) {
-        let verticalDiv = createVerticalDiv();
-        verticalDiv.classList.add("verticalDiv")
-        for (z = 0; z < number; z++) {
-            let horizontalDiv = createHorizontalDiv()
-            verticalDiv.appendChild(horizontalDiv);
-        } 
-        container.appendChild(verticalDiv);
+    let numberSquare = number * number;
+    for (i = 0; i < numberSquare; i++) {
+        let element = createElement();
+        element.classList.add("element");
+        gridContainer.appendChild(element);
     }
 }
 
-function createVerticalDiv() {
-    let verticalDiv = document.createElement('div');
-    verticalDiv.classList.add("verticalDiv");
-    return verticalDiv
-}
-
-function createHorizontalDiv() {
-    let horizontalDiv = document.createElement('div');
-    horizontalDiv.classList.add("horizontalDiv");
-    return horizontalDiv
+function createElement() {
+    let newElement = document.createElement('div');
+    return newElement
 }
 
 // Listens for hover on each div square. 
 listenForSquareHover();
 function listenForSquareHover() {
-    let squares = document.querySelectorAll(".horizontalDiv");
+    let squares = document.querySelectorAll(".element");
     squares.forEach(square => {
         square.addEventListener("mouseenter", colorise)
     });
@@ -123,5 +124,4 @@ function colorise(e) {
             break;
     }
 }
-
 })

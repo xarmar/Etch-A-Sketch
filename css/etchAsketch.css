@@ -2,20 +2,20 @@ body{
     background: khaki;
 }
 
+#introduction h1 {
+    font-size: 200%;
+}
+
 .input {
     margin-left: 2%;
-    padding: 1%;
+    padding: 2%;
     max-width: 15%;
 }
 
 .submitButton {
     margin-left: 2%;
-    padding-left: 1%;
-    padding-right: 1%;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding: 2%;
 }
-
 
 #resetButton {
     padding-left: 1%;
@@ -31,27 +31,16 @@ body{
     text-align: center;
 }
 
+
 #gridContainer {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1%;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
+    display: grid;
+    max-width: 350px;
+    min-height: 350px;
+    margin: 2rem auto;
+    border: 2px solid black;
 }
 
-
-.verticalDiv {
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    flex-direction: row;
-}
-
-.horizontalDiv {
-    display: flex;
-    flex-direction: row;
-    background-color: green;
-    margin: 1px;
-    padding: 10px;
+.element {
+    display: grid;
+    background-color: white;
 }
