@@ -17,6 +17,7 @@ function resetPrompt() {
     let promptUser = document.createElement("input");
     promptUser.placeholder = " Number '10' =  10x10 grid"
     promptUser.classList.add("input");
+    console.log(promptUser.attributes);
     introductionId.appendChild(promptUser);
     let submitButton = document.createElement("button");
     submitButton.innerText = "Create"
