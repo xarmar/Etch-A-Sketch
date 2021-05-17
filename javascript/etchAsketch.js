@@ -17,7 +17,6 @@ function resetPrompt() {
     let promptUser = document.createElement("input");
     promptUser.placeholder = " Number '10' =  10x10 grid"
     promptUser.classList.add("input");
-    console.log(promptUser.attributes);
     introductionId.appendChild(promptUser);
     let submitButton = document.createElement("button");
     submitButton.innerText = "Create"
@@ -34,7 +33,7 @@ function resetPrompt() {
 
     function fullReset(){
         let userInput = promptUser.value;
-        if (isNaN(userInput) || userInput > 100 || userInput === ""){
+        if (isNaN(userInput) || userInput > 100 || userInput === "" || userInput < 1){
             alert("Only numbers equal to or smaller than 100 are valid.")
         }
         else {
@@ -83,9 +82,10 @@ listenForSquareHover();
 function listenForSquareHover() {
     let squares = document.querySelectorAll(".element");
     squares.forEach(square => {
-        square.addEventListener("mouseenter", colorise)
+        square.addEventListener("mouseenter", colorise);
     });
 }
+
 // Adds random colour to each square.
 function colorise(e) {
     let targetSquare = e.target;
