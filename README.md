@@ -4,4 +4,4 @@
 
 # What I Learned
 - DOM Manipulation.
-- How to use CSS Grid properly.
+- How to use CSS grid.
